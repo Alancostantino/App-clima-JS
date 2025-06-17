@@ -17,6 +17,7 @@ function fetchDatosClima(ciudad){
 }
 
 function mosrtarDatosClima(response){
+    console.log(response)
     const divDatosClima = document.getElementById('datosClima')
     divDatosClima.innerHTML = ''
 
@@ -25,10 +26,13 @@ function mosrtarDatosClima(response){
     const temperatura = response.main.temp
     const descripcion = response.weather[0].description
     const humedad = response.main.humidity
+    const icon = response.weather[0].icon
 
     const ciudadTitulo = document.createElement('h2')
     ciudadTitulo.textContent = `${ciudadNombre}, ${paisNombre} `
 
+    const iconInfo = document.createElement('img')
+    iconInfo.src = `https://openweathermap.org/img/wn/${icon}@2x.png`
     const tempInfo = document.createElement('p')
     tempInfo.textContent = `La temperatura es : ${Math.floor(temperatura-difKelvin)}°C`
 
@@ -39,6 +43,7 @@ function mosrtarDatosClima(response){
     humedadInfo.textContent = `La humedad es de : ${humedad}%`
 
     divDatosClima.appendChild(ciudadTitulo)
+    divDatosClima.appendChild(iconInfo)
     divDatosClima.appendChild(tempInfo)
     divDatosClima.appendChild(descripcionInfo)
     divDatosClima.appendChild(humedadInfo)
